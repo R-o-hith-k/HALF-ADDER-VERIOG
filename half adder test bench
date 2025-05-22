@@ -1,0 +1,40 @@
+
+
+module half_adder_tb;
+
+    // Inputs
+    reg A;
+    reg B;
+
+    // Outputs
+    wire SUM;
+    wire CARRY;
+
+    // Instantiate the Half Adder
+    half_adder uut (
+        .A(A),
+        .B(B),
+        .SUM(SUM),
+        .CARRY(CARRY)
+    );
+
+    initial begin
+        // Optional: Dump waveforms for Vivado (XSim)
+        $dumpfile("half_adder_tb.vcd");
+        $dumpvars(0, half_adder_tb);
+
+        // Monitor values
+        $monitor("Time = %0t : A = %b, B = %b -> SUM = %b, CARRY = %b",
+                 $time, A, B, SUM, CARRY);
+
+        // Test vectors
+        A = 0; B = 0; #10;
+        A = 0; B = 1; #10;
+        A = 1; B = 0; #10;
+        A = 1; B = 1; #10;
+
+        // End simulation
+        $finish;
+    end
+
+endmodule
